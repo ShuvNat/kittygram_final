@@ -1,13 +1,8 @@
+# flake8: noqa
 import os
 from pathlib import Path
 
-import environ
-
 BASE_DIR = Path(__file__).resolve().parent.parent
-
-env = environ.Env()
-
-environ.Env.read_env(os.path.join(BASE_DIR.parent, '.env'))
 
 SECRET_KEY = 'django-insecure-cg6*%6d51ef8f#4!r3*$vmxm4)abgjw8mo!4y-q*uq1!4$-89$'
 
@@ -62,11 +57,11 @@ WSGI_APPLICATION = 'kittygram_backend.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': env('POSTGRES_DB', default='django'),
-        'USER': env('POSTGRES_USER', default='django'),
-        'PASSWORD': env('POSTGRES_PASSWORD', default=''),
-        'HOST': env('DB_NAME', default=''),
-        'PORT': env.int('DB_PORT', default=5432)
+        'NAME': os.getenv('POSTGRES_DB', 'django'),
+        'USER': os.getenv('POSTGRES_USER', 'django'),
+        'PASSWORD': os.getenv('POSTGRES_PASSWORD', ''),
+        'HOST': os.getenv('DB_NAME', ''),
+        'PORT': os.getenv('DB_PORT', 5432)
     }
 }
 
@@ -101,7 +96,6 @@ USE_TZ = True
 
 
 STATIC_URL = '/static/'
-
 STATIC_ROOT = BASE_DIR / 'collected_static'
 
 MEDIA_URL = '/media/'
@@ -111,7 +105,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.IsAuthenticated',
+        'rest_framework.permissions.IsAuthenticated', 
     ],
 
     'DEFAULT_AUTHENTICATION_CLASSES': [
