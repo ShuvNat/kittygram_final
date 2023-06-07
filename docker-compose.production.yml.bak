@@ -7,7 +7,7 @@ volumes:
   media_volume:
 
 services:
-  kittygram_db:
+  db:
     image: postgres:13.10
     env_file: .env
     volumes:
