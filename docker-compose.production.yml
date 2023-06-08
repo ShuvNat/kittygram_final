@@ -17,21 +17,21 @@ services:
     image: shuvnat/kittygram_backend
     env_file: .env
     volumes:
-      - static_volume:/static
+      - static_volume:/backend_static
       - media_volume:/app/media/
   
   frontend:
     image: shuvnat/kittygram_frontend 
     env_file: .env
-    command: cp -r /app/build/. /static/
+    command: cp -r /app/build/. /frontend_static/
     volumes:
-      - static_volume:/static
+      - static_volume:frontend_static
   
   gateway:
     image: shuvnat/kittygram_gateway
     env_file: .env
     volumes:
-      - static_volume:/static
+      - static_volume:/staticfiles/
       - media_volume:/app/media/
     ports:
       - 9000:80
