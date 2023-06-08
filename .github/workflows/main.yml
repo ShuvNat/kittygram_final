@@ -145,8 +145,9 @@ jobs:
         target: "kittygram"
     - name: creating .env file
       run: |
-        touch kittygram/.env
-        echo "${{ secrets.ENV }}" > kittygram/.env
+        cd kittygram
+        touch .env
+        echo "${{ secrets.ENV }}" > .env
     - name: Executing remote ssh commands to deploy
       uses: appleboy/ssh-action@master
       with:
