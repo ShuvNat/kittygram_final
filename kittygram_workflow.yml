@@ -153,7 +153,7 @@ jobs:
         script: |
           cd kittygram
           touch .env
-          echo SEKRET_KEY = ${{ secrets.SECRET_KEY }} >> .env
+          echo SECRET_KEY = ${{ secrets.SECRET_KEY }} >> .env
           cat .env
           sudo docker compose -f docker-compose.production.yml pull
           sudo docker compose -f docker-compose.production.yml down
