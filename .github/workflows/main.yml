@@ -152,12 +152,12 @@ jobs:
         passphrase: ${{ secrets.SSH_PASSPHRASE }}
         script: |
           cd kittygram
-          touch .env
-          echo SECRET_KEY = ${{ secrets.SECRET_KEY }} >> .env
-          cat .env
           sudo docker compose -f docker-compose.production.yml pull
           sudo docker compose -f docker-compose.production.yml down
           sudo docker compose -f docker-compose.production.yml up -d
+          sudo docker compose -f docker-compose.production.yml exec touch .env
+          sudo docker compose -f docker-compose.production.yml exec echo SECRET_KEY = ${{ secrets.SECRET_KEY }} >> .env
+          sudo docker compose -f docker-compose.production.yml exec cat .env
           sudo docker compose -f docker-compose.production.yml exec backend python manage.py migrate
           sudo docker compose -f docker-compose.production.yml exec backend python manage.py collectstatic
           sudo docker compose -f docker-compose.production.yml exec backend cp -r /app/collected_static/. /backend_static/static/
