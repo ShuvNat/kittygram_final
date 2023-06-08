@@ -143,6 +143,9 @@ jobs:
         passphrase: ${{ secrets.SSH_PASSPHRASE }}
         source: "docker-compose.production.yml"
         target: "kittygram"
+    - name: creating .env file
+      run:
+        echo "${{ secrets.ENV }}" > kittygram/.env
     - name: Executing remote ssh commands to deploy
       uses: appleboy/ssh-action@master
       with:
@@ -152,7 +155,6 @@ jobs:
         passphrase: ${{ secrets.SSH_PASSPHRASE }}
         script: |
           cd kittygram
-          echo ${{ secrets.ENV }} >> .env
           sudo docker compose -f docker-compose.production.yml pull
           sudo docker compose -f docker-compose.production.yml down
           sudo docker compose -f docker-compose.production.yml up -d
