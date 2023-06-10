@@ -11,9 +11,9 @@ env.read_env(os.path.join(BASE_DIR.parent, '.env'))
 
 SECRET_KEY = env('SECRET_KEY')
 
-DEBUG = True
+DEBUG = env.bool('DEBUG', default = False)
 
-ALLOWED_HOSTS = ['127.0.0.1', 'localhost', '84.201.154.79', 'kittygram.onthewifi.com']
+ALLOWED_HOSTS = env.list('ALLOWED_HOST', default = ['127.0.0.1', 'localhost'])
 
 INSTALLED_APPS = [
     'django.contrib.admin',
