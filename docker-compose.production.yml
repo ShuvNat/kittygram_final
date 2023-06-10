@@ -16,6 +16,7 @@ services:
   backend:
     env_file: .env
     image: ${DOCKER_USERNAME}/kittygram_backend
+    depends_on: db
     volumes:
       - static_volume:/backend_static
       - media_volume:/app/media
@@ -30,6 +31,7 @@ services:
   gateway:
     env_file: .env
     image: ${DOCKER_USERNAME}/kittygram_gateway
+    depends_on: backend
     volumes:
       - static_volume:/staticfiles
       - media_volume:/app/media
