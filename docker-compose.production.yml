@@ -18,7 +18,7 @@ services:
     env_file: .env
     volumes:
       - static_volume:/backend_static
-      - media_volume:/app/media
+      - media_volume:/mediafiles
   
   frontend:
     image: ${{ secrets.DOCKER_USERNAME }}/kittygram_frontend 
@@ -32,6 +32,6 @@ services:
     env_file: .env
     volumes:
       - static_volume:/staticfiles
-      - media_volume:/app/media
+      - media_volume:/mediafiles
     ports:
       - 9000:80
